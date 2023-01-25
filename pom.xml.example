@@ -4,15 +4,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId><%= @namespace %>.<%= @api.downcase %></groupId>
-	<artifactId><%= @artifactid %></artifactId>
+	<groupId>com.refinitiv.ema</groupId>
+	<artifactId>EMA_Java_2.0.8_Maven</artifactId>
 	<version>1.0</version>
-	<name><%= @artifactid %></name>
+	<name>EMA_Java_2.0.8_Maven</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source><%= @compat_jdk_version %></maven.compiler.source>
-		<maven.compiler.target><%= @compat_jdk_version %></maven.compiler.target>
-		<rtsdk.version><%= @rtsdkversion %></rtsdk.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<rtsdk.version>3.6.8.0</rtsdk.version>
 		<javafx.version>15.0.1</javafx.version>
 	</properties>
 	<dependencies>
@@ -20,11 +20,11 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<scope><%= @junitscope %></scope>
+			<scope>test</scope>
 		</dependency>
-        <% if @api == "EMA" %>
+        
 		<dependency>
-			<groupId><%= @namespace %>.ema
+			<groupId>com.refinitiv.ema
 			</groupId>
 			<artifactId>ema</artifactId>
 			<version>${rtsdk.version}</version>
@@ -39,23 +39,7 @@
 			<artifactId>javafx-controls</artifactId>
 			<version>${javafx.version}</version>
 		</dependency>
-        <% elsif @api == "ETA" %>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>1.9.5</version>
-		</dependency>
-		<dependency>
-			<groupId><%= @namespace %>.<%= @transportapi %>.valueadd.cache</groupId>
-			<artifactId><%= @transportapi %>ValueAddCache</artifactId>
-			<version>${rtsdk.version}</version>
-		</dependency>
-		<dependency>
-			<groupId><%= @namespace %>.<%= @transportapi %>.ansi</groupId>
-			<artifactId>ansipage</artifactId>
-			<version>${rtsdk.version}</version>
-		</dependency>
-        <% end %>
+        
 	</dependencies>
 	<build>
 		<plugins>
@@ -72,11 +56,9 @@
 							<archive>
 								<manifest>
 									<mainClass>
-										<% if @api == "EMA" %>
+										
                                         com.refinitiv.ema.examples.training.consumer.series100.ex100_MP_Streaming.Consumer
-                                        <% elsif @api == "ETA" %>
-                                        com.refinitiv.eta.valueadd.examples.consumer.Consumer
-                                        <% end %>
+                                        
 									</mainClass>
 								</manifest>
 							</archive>

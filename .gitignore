@@ -1,2 +1,3 @@
 src/automate_rtsdk_code.rb
-config/
+src/pom.xml
+pom.xml
