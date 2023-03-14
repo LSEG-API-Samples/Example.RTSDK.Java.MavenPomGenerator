@@ -1,6 +1,6 @@
 # RTSDK Java Maven Pom file Generator (using Ruby)
-- version: Draft
-- Last update: January
+- version: 1.0
+- Last update: March 2023
 - Environment: Windows
 - Prerequisite: [Prerequisite](#prerequisite)
 
@@ -23,18 +23,14 @@ The RTSDK Java version detail is available in the ```config/rtsdk_versions.yaml`
 ``` YAML
 --- # RTSDK Version Mapping
 rtsdk_versions:
-  2.0.0: '3.6.0.0'
-  2.0.1: '3.6.1.0'
-  2.0.2: '3.6.2.0'
-  2.0.3: '3.6.3.1'
-  2.0.4: '3.6.4.0'
   2.0.5: '3.6.5.0'
   2.0.6: '3.6.6.0'
   2.0.7: '3.6.7.3'
   2.0.8: '3.6.8.0'
+  2.10.0: '3.7.0.0'
 ```
 
-You can add more versions by add the RTSDK Java version as a Key (```2.0.9```, ```2.0.10```, and so on), then add the EMA/ETA Java Maven Central version as a string value. The EMA/ETA Java Maven Central version number is available on the *# Maven Central* section of the RTSDK Java's README file.
+You can add more versions by add the RTSDK Java version as a Key (```2.10.0```, ```2.11.0```, and so on), then add the EMA/ETA Java Maven Central version as a string value. The EMA/ETA Java Maven Central version number is available on the *# Maven Central* section of the RTSDK Java's README file.
 
 **Update Nov 2022**: 
 - For RTSDK version 2.0.7.**L2**, please specify the RTSDK version as **3.6.7.3** in the pom.xml file.
