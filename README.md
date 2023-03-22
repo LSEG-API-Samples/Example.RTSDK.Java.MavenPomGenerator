@@ -27,10 +27,10 @@ rtsdk_versions:
   2.0.6: '3.6.6.0'
   2.0.7: '3.6.7.3'
   2.0.8: '3.6.8.0'
-  2.10.0: '3.7.0.0'
+  2.1.0: '3.7.0.0'
 ```
 
-You can add more versions by add the RTSDK Java version as a Key (```2.10.0```, ```2.11.0```, and so on), then add the EMA/ETA Java Maven Central version as a string value. The EMA/ETA Java Maven Central version number is available on the *# Maven Central* section of the RTSDK Java's README file.
+You can add more versions by add the RTSDK Java version as a Key (```2.1.0```, ```2.2.0```, and so on), then add the EMA/ETA Java Maven Central version as a string value. The EMA/ETA Java Maven Central version number is available on the *# Maven Central* section of the RTSDK Java's README file.
 
 **Update Nov 2022**: 
 - For RTSDK version 2.0.7.**L2**, please specify the RTSDK version as **3.6.7.3** in the pom.xml file.

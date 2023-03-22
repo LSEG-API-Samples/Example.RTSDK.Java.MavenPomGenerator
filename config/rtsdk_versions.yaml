@@ -9,9 +9,9 @@ rtsdk_versions:
   2.0.6: '3.6.6.0'
   2.0.7: '3.6.7.3'
   2.0.8: '3.6.8.0'
-  2.10.0: '3.7.0.0'
+  2.1.0: '3.7.0.0'
 
-latest_version: '2.10.0'
+latest_version: '2.1.0'
 
 support_jdk_version: '11' #'1.8' #17
 #support_jdk_version: '1.8'
