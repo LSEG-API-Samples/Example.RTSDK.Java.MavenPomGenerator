@@ -1,0 +1,6 @@
+{
+    "name": "RTSDK_Pom_Generator",
+    "image": "ruby:3.2.2-slim",
+    "shutdownAction":"stopContainer",
+    "postCreateCommand": "bundle install"
+}

@@ -11,7 +11,7 @@ ALL EXAMPLE CODE IS PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS FOR 
 =end
 
 require "optparse"
-require "FileUtils"
+require "fileutils"
 require "erb"
 require "yaml"
 
