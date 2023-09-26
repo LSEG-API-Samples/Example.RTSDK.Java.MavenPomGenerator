@@ -1,20 +1,121 @@
 # RTSDK Java Maven Pom file Generator (using Ruby)
-- version: 1.5
-- Last update: September 2023
+- version: 2.0
+- Last update: October 2023
 - Environment: Windows
 - Prerequisite: [Prerequisite](#prerequisite)
 
-## Introduction
+## <a id="Introduction"></a>Introduction
 
-This is an example tool for generating RTSDK Java Examples Maven's pom.xml file. The tool just creates a ```pom.xml``` file for running EMA or ETA Java API example project. 
+[Refinitiv Real-Time SDK (Java Edition)](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) (RTSDK, formerly known as Elektron SDK) is a suite of modern and open source APIs that aim to simplify development through a strong focus on ease of use and standardized access to a broad set of Refinitiv proprietary content and services via the proprietary TCP connection named RSSL and proprietary binary message encoding format named OMM Message. The capabilities range from low latency/high-performance APIs right through to simple streaming Web APIs. 
 
-The tool supports RTSDK Java since the rebranding version 2.0.0.L1 (EMA/ETA 3.6.0).
+The SDK has been released on the [Maven Central Repository](https://central.sonatype.com/) to support the modern Java development life cycle since the RTSDK Java (formerly known as Elektron SDK) version 1.2. The Maven Central Repository supported also lets SDK compatibilities with the Java build automation tools like [Gradle](https://gradle.org/) and [Apache Maven](https://maven.apache.org/). This helps Java developers to build RTSDK Java applications, manage its dependencies (Java Developers do not need to manually manage different versions of jar files anymore), and better collaboration in the team.
+
+The RTSDK Java package comes with the Gradle build tool supported by default. Some developers who are using Maven might feel difficult to try the SDK example codes in their Maven development workflow. 
+
+
+To make Maven developers life easier, I am creating simple tool for generating RTSDK Java Examples Maven's pom.xml file to run the RTSDK Java example source code. The tool supports RTSDK Java since the rebranding version 2.0.0.L1 (EMA/ETA 3.6.0), and you can customize the configuration file to make it supports the future versions of the SDK.
 
 ### Caution
- The generated ```pom.xml``` file aims for using with the RTSDK Java examples only. The file is **not optimized and not recommended for the Production use!**. I am not provide any supports for this simple tool.
+
+The generated pom.xml file is for running EMA or ETA APIs examples only. The file is **not optimized and not recommended for the Production use!**. I am not provide any supports for this simple tool.
+
 
 ## <a id="prerequisite"></a>Prerequisite
-All scripts require [Ruby](https://www.ruby-lang.org/en/) compiler.
+
+All scripts require [Ruby](https://www.ruby-lang.org/en/) compiler. 
+
+The application logic of this tool is simple enough that you can re-create in other programming language. I am choosing Ruby because its simplicity. 
+
+## <a id="rtsdkj_maven"></a>Maven pom.xml setting for RTSDK Java
+
+The ```pom.xml``` file the main Maven's project configuration. This XML file contains the information required to build a project.
+
+### Maven pom.xml file for EMA Java Examples
+
+The EMA API Java edition has two type of example applications as follows:
+- console example applications in the *training* folder (for Consumer, Interactive Provider, and Non-Interactive Provider applications)
+- GUI consumer example application in the *rrtmdviewer** folder.
+
+The GUI example needs [JavaFX](https://openjfx.io/) dependency, so the pom.xml file need JavaFX dependency information too.
+
+You can specify the following EMA Java API and JavaFX dependencies in the Maven pom.xml file for running the EMA Java example applications.
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    ...
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <rtsdk.version>3.7.2.0</rtsdk.version>
+    <javafx.version>15.0.1</javafx.version>
+</properties>
+
+    <dependencies>
+        <!-- RTSDK -->
+        <!-- For EMA Java Project -->
+        <dependency>
+            <groupId>com.refinitiv.ema</groupId>
+            <artifactId>ema</artifactId>
+            <version>${rtsdk.version}</version>
+        </dependency>
+    </dependencies>
+    <dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>${javafx.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>${javafx.version}</version>
+		</dependency>
+</project>
+```
+
+### Maven pom.xml file for ETA Java Examples
+
+The pom.xml file for the ETA Java application is the following. The Maven can automatic pull ETA, ETA ValueAdd and ETA JSON Converter artifacts within Maven central for the application with the ```com.refinitiv.eta.valueadd.cache``` dependency declaration.
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    ...
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <rtsdk.version>3.7.2.0</rtsdk.version>
+</properties>
+    <!-- RTSDK -->
+    <!-- For ETA Java Project -->
+    <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>compile</scope>
+		</dependency>
+        
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.refinitiv.eta.valueadd.cache</groupId>
+			<artifactId>etaValueAddCache</artifactId>
+			<version>${rtsdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.refinitiv.eta.ansi</groupId>
+			<artifactId>ansipage</artifactId>
+			<version>${rtsdk.version}</version>
+		</dependency>
+</project>
+```
 
 ## How to add new RTSDK Java version
 
