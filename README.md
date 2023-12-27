@@ -6,12 +6,11 @@
 
 ## <a id="Introduction"></a>Introduction
 
-[Refinitiv Real-Time SDK (Java Edition)](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) (RTSDK, formerly known as Elektron SDK) is a suite of modern and open source APIs that aim to simplify development through a strong focus on ease of use and standardized access to a broad set of Refinitiv proprietary content and services via the proprietary TCP connection named RSSL and proprietary binary message encoding format named OMM Message. The capabilities range from low latency/high-performance APIs right through to simple streaming Web APIs. 
+[LSEG Real-Time SDK (Java Edition)](https://developers.lseg.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) (RTSDK, formerly known as Elektron SDK) is a suite of modern and open source APIs that aim to simplify development through a strong focus on ease of use and standardized access to a broad set of Refinitiv proprietary content and services via the proprietary TCP connection named RSSL and proprietary binary message encoding format named OMM Message. The capabilities range from low latency/high-performance APIs right through to simple streaming Web APIs. 
 
 The SDK has been released on the [Maven Central Repository](https://central.sonatype.com/) to support the modern Java development life cycle since the RTSDK Java (formerly known as Elektron SDK) version 1.2. The Maven Central Repository supported also lets SDK compatibilities with the Java build automation tools like [Gradle](https://gradle.org/) and [Apache Maven](https://maven.apache.org/). This helps Java developers to build RTSDK Java applications, manage its dependencies (Java Developers do not need to manually manage different versions of jar files anymore), and better collaboration in the team.
 
 The RTSDK Java package comes with the Gradle build tool supported by default. Some developers who are using Maven might feel difficult to try the SDK example codes in their Maven development workflow. 
-
 
 To make Maven developers life easier, I am creating simple tool for generating RTSDK Java Examples Maven's pom.xml file to run the RTSDK Java example source code. The tool supports RTSDK Java since the rebranding version 2.0.0.L1 (EMA/ETA 3.6.0), and you can customize the configuration file to make it supports the future versions of the SDK.
 
@@ -124,10 +123,12 @@ The RTSDK Java version detail is available in the ```config/rtsdk_versions.yaml`
 ``` YAML
 --- # RTSDK Version Mapping
 rtsdk_versions:
-  2.0.8: '3.6.8.0'
   2.1.0: '3.7.0.0'
   2.1.1: '3.7.1.0'
   2.1.2: '3.7.2.0'
+  2.1.3: '3.7.3.0'
+
+latest_version: '2.1.3'
 ```
 
 You can add more versions by add the RTSDK Java version as a Key (```2.2.0```, ```2.2.1```, and so on), then add the [EMA/ETA Java Maven Central](https://central.sonatype.com/?smo=true) version as a string value. The EMA/ETA Java Maven Central version number is available on the *# Maven Central* section of the RTSDK Java's README file and the [Maven Central](https://central.sonatype.com/?smo=true) website.
@@ -135,13 +136,15 @@ You can add more versions by add the RTSDK Java version as a Key (```2.2.0```, `
 **Update Nov 2022**: 
 - For RTSDK version 2.0.7.**L2**, please specify the RTSDK version as **3.6.7.3** in the pom.xml file.
 
-Example *with dummy version*:
+Example *with dummy versions*:
 ``` YAML
 --- # RTSDK Version Mapping
 rtsdk_versions:
   2.0.7: '3.6.7.3'
   2.0.8: '3.6.8.0'
   3.0.1: '4.7.1.0' 
+
+latest_version: '3.0.1'
 ```
 
 ## How to Use
@@ -163,12 +166,12 @@ Done creating pom.xml
 
 ## <a id="ref"></a>References
 
-* [Refinitiv Real-Time SDK Java page](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) on the [Refinitiv Developer Community](https://developers.refinitiv.com/) web site.
-* [Refinitiv Real-Time SDK Family](https://developers.refinitiv.com/en/use-cases-catalog/refinitiv-real-time) page.
+* [Refinitiv Real-Time SDK Java page](https://developers.lseg.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) on the [Refinitiv Developer Community](https://developers.lseg.com/) website.
+* [Refinitiv Real-Time SDK Family](https://developers.lseg.com/en/use-cases-catalog/refinitiv-real-time) page.
 * [Apache Maven Project page](https://www.apache.org/)
 * [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/)
 * [Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 * [Maven Central Repository Search](https://search.maven.org/)
-* [Developer Article: How to Set Up Refinitiv Real-Time SDK Java Application with Maven](https://developers.refinitiv.com/en/article-catalog/article/how-to-set-up-refinitiv-real-time-sdk-java-application-with-mave).
-* [Developer Article: How to deploy and run Real-Time Java Application with Maven in Docker](https://developers.refinitiv.com/en/article-catalog/article/how-to-deploy-and-run-real-time-java-application-with-maven-in-d).
-* [How to Set Up Real-Time SDK Java Application with Maven on the Eclipse IDE](https://developers.refinitiv.com/en/article-catalog/article/how-to-set-up-real-time-sdk-java-application-with-maven-on-the-e) on the the [Refinitiv Developer Community](https://developers.refinitiv.com/) web site.
+* [Developer Article: How to Set Up Refinitiv Real-Time SDK Java Application with Maven](https://developers.lseg.com/en/article-catalog/article/how-to-set-up-refinitiv-real-time-sdk-java-application-with-mave).
+* [Developer Article: How to deploy and run Real-Time Java Application with Maven in Docker](https://developers.lseg.com/en/article-catalog/article/how-to-deploy-and-run-real-time-java-application-with-maven-in-d).
+* [How to Set Up Real-Time SDK Java Application with Maven on the Eclipse IDE](https://developers.lseg.com/en/article-catalog/article/how-to-set-up-real-time-sdk-java-application-with-maven-on-the-e) on the the [LSEG Developer Community](https://developers.lseg.com/) web site.
