@@ -1,6 +1,6 @@
 # RTSDK Java Maven Pom file Generator (using Ruby)
 - version: 2.0
-- Last update: October 2023
+- Last update: December 2023
 - Environment: Windows
 - Prerequisite: [Prerequisite](#prerequisite)
 
