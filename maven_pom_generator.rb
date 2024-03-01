@@ -2,7 +2,7 @@
 #|            This source code is provided under the MIT license             --
 #|  and is provided AS IS with no warranty or guarantee of fit for purpose.  --
 #|                See the project's LICENSE.md for details.                  --
-#|           Copyright Refinitiv 2023.       All rights reserved.            --
+#|           Copyright LSEG 2023.       All rights reserved.                 --
 #|-----------------------------------------------------------------------------
 
 =begin
@@ -16,8 +16,8 @@ require "erb"
 require "yaml"
 
 default_api = "EMA"
-default_ema_pom_template = "../templates/rtsdk_maven_pom_xml.erb"
-rtsdk_versions_config = "../config/rtsdk_versions.yaml"
+default_ema_pom_template = "./templates/rtsdk_maven_pom_xml.erb"
+rtsdk_versions_config = "./config/rtsdk_versions.yaml"
 maven_rtsdk_version_data  = YAML.load(File.read(rtsdk_versions_config))
 
 # define defaul input parameter
@@ -28,7 +28,7 @@ optparse = OptionParser.new do |opts|
     opts.banner = "Usage: ruby_automate.rb [options]"
     #opts.on("--folder n", "input the base folder that store all cases folders") { |folder| options[:folder] = folder }
     opts.on("--api n", "RTSDK API (EMA/ETA) [optional]"){|api| options[:api] = api}
-    opts.on("--version n", "ESDK/RTSDK Java version [optional]"){|sdkversion| options[:sdkversion] = sdkversion}
+    opts.on("--version n", "RTSDK Java version [optional]"){|sdkversion| options[:sdkversion] = sdkversion}
 end
 
 optparse.parse!
@@ -41,17 +41,17 @@ optparse.parse!
 
 folder = "#{options[:folder]}"
 # pom.xml
-pom_file = "./pom.xml"
+pom_file = "./output_pom/pom.xml"
 
 @api = options[:api]
 
-if @api == "EMA" then
-    @junitscope = "test"
-    puts "EMA"
+if @api == "ETA" then
+    @junitscope = "compile" 
 else 
-    @junitscope = "compile"
-    puts "ETA"
+    @junitscope = "test"
+    @api = "EMA"
 end
+puts @api
 
 @artifactid = "#{options[:api]}_Java_#{options[:sdkversion]}_Maven"
 
@@ -62,7 +62,9 @@ if maven_rtsdk_version_data["rtsdk_versions"][sdk_version] then
     @rtsdkversion = maven_rtsdk_version_data["rtsdk_versions"][sdk_version]
     puts @rtsdkversion
 else
-    @rtsdkversion = maven_rtsdk_version_data["latest_version"]
+    latest_version = maven_rtsdk_version_data["latest_version"]
+    puts "latest_version = #{latest_version}"
+    @rtsdkversion =  maven_rtsdk_version_data["rtsdk_versions"][latest_version]
     puts "not found that version, use the latest version instead #{@rtsdkversion}"
 end
 

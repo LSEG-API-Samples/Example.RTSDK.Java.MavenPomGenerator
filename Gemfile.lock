@@ -4,6 +4,7 @@ GEM
     fileutils (1.7.1)
 
 PLATFORMS
+  x64-mingw-ucrt
   x86_64-linux
 
 DEPENDENCIES

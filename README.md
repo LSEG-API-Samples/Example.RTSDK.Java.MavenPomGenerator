@@ -1,6 +1,6 @@
 # RTSDK Java Maven Pom file Generator (using Ruby)
-- version: 2.0
-- Last update: December 2023
+- version: 3.0
+- Last update: March 2024
 - Environment: Windows
 - Prerequisite: [Prerequisite](#prerequisite)
 
@@ -21,7 +21,7 @@ The generated pom.xml file is for running EMA or ETA APIs examples only. The fil
 
 ## <a id="prerequisite"></a>Prerequisite
 
-All scripts require [Ruby](https://www.ruby-lang.org/en/) compiler. 
+All scripts require [Ruby](https://www.ruby-lang.org/en/) compiler or [Docker Desktop](https://www.docker.com/products/docker-desktop/) application to run.
 
 The application logic of this tool is simple enough that you can re-create in other programming language. I am choosing Ruby because its simplicity. 
 
@@ -147,13 +147,17 @@ rtsdk_versions:
 latest_version: '3.0.1'
 ```
 
-## How to Use
+## How to Use with Ruby
 
-1. Go to the project *src* folder in a command prompt.
-2. Run the *maven_pom_generator.rb* in the *src* folder with the following command line argument:
+1. Open a project folder in command prompt and run the following command
+    ```bash
+    $> bundle install
+    ```
+2. Run the *maven_pom_generator.rb* script with the following command line argument:
     ``` Bash
     $>ruby maven_pom_generator.rb --api <EMA (default)/ETA> --version <RTSDK version, ex 2.0.8>
     ```
+3. The result ```pom.xml``` file will be generated in the ```output_pom``` folder.
 
 Example result:
 ``` Bash
@@ -162,6 +166,46 @@ EMA
 3.6.8.0
 use JDK 11
 Done creating pom.xml
+```
+
+## How to use with Docker
+1. Open a ```compose.yaml``` file and edit the following content to match your requirements
+    
+    ```yaml
+    version: "3"
+    name: maven_pom_generator
+    services:
+    app:
+        build: 
+        context: .
+        volumes:
+         - "<Your Host OS full Path>\\output_pom:/App/output_pom"
+        command:
+        - --API=EMA
+        #- --version=2.1.3
+        #- --API=ETA
+        #- --version=<RTSDK Java version>
+    ```
+    Note: For the Windows OS, the host volume must be full path like ```"C:\\Users\\<user>\\output_pom:/App/output_pom"```
+2. Start a container with the following command
+    ```bash
+    $> docker compose up
+    ```
+3. The result ```pom.xml``` file will be generated in the ```output_pom``` folder.
+4. To remove a container, use ```docker compose down``` command.
+5. To remove an image, use ```docker rmi maven_pom_generator-app``` command.
+
+Example result:
+```Bash
+C:\drive_d\Project\Code\EMA_Ruby_Maven_Generator>docker compose up
+[+] Running 1/0
+ ✔ Container maven_pom_generator-app-1  Created                                                                        0.0s 
+Attaching to app-1
+app-1  | EMA
+app-1  | 3.7.3.0
+app-1  | use JDK 11
+app-1  | Done creating pom.xml
+app-1 exited with code 0
 ```
 
 ## <a id="ref"></a>References

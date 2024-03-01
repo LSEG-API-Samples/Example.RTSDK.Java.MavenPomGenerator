@@ -1,0 +1,14 @@
+version: "3"
+name: maven_pom_generator
+services:
+  app:
+    build: 
+      context: .
+    volumes:
+      - "C:\\drive_d\\Project\\Code\\EMA_Ruby_Maven_Generator\\output_pom:/App/output_pom"
+    #  - "<Your Host OS full Path>\\output_pom:/App/output_pom"
+    command:
+    - --API=EMA
+    #- --version=2.1.3
+    #- --API=ETA
+    #- --version=<RTSDK Java version>
